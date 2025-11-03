@@ -1,0 +1,128 @@
+# Paper-Recommended Stable Presets
+#
+# Based on arXiv 2510.24657 (GRAG-Image-Editing)
+# Range: 0.95-1.15 (paper's validated stable range)
+#
+# These presets follow the paper's recommendations for stable,
+# training-free image editing with maximum predictability.
+
+presets:
+  paper_minimal:
+    name: "Paper: Minimal"
+    lambda: 0.98
+    delta: 1.02
+    strength: 1.0
+    description: "Minimal edit, maximum stability (paper validated)"
+    category: "paper_stable"
+    use_case: "subtle refinements, preserving structure"
+
+  paper_subtle:
+    name: "Paper: Subtle"
+    lambda: 1.00
+    delta: 1.05
+    strength: 1.0
+    description: "Subtle edit within paper's stable range"
+    category: "paper_stable"
+    use_case: "gentle transformations, window preservation"
+
+  paper_balanced:
+    name: "Paper: Balanced"
+    lambda: 1.05
+    delta: 1.10
+    strength: 1.0
+    description: "Recommended starting point (paper validated)"
+    category: "paper_stable"
+    use_case: "general editing, first-time GRAG use"
+
+  paper_moderate:
+    name: "Paper: Moderate"
+    lambda: 1.10
+    delta: 1.12
+    strength: 1.0
+    description: "Moderate edit, still within stable range"
+    category: "paper_stable"
+    use_case: "visible transformations, material changes"
+
+  paper_strong:
+    name: "Paper: Strong"
+    lambda: 1.12
+    delta: 1.15
+    strength: 1.0
+    description: "Maximum paper-recommended strength"
+    category: "paper_stable"
+    use_case: "significant transformation, maximum paper stability"
+
+  # Extended range (beyond paper, but conservative)
+  conservative_low:
+    name: "Conservative: Low"
+    lambda: 0.90
+    delta: 0.95
+    strength: 1.0
+    description: "Below paper range, very conservative"
+    category: "conservative"
+    use_case: "extreme structure preservation"
+
+  conservative_high:
+    name: "Conservative: High"
+    lambda: 1.15
+    delta: 1.20
+    strength: 1.0
+    description: "Just above paper range, still conservative"
+    category: "conservative"
+    use_case: "clear edits, maintained stability"
+
+  # v2.2.1 Proven Ranges (for visible effects)
+  v221_balanced:
+    name: "v2.2.1: Balanced"
+    lambda: 1.00
+    delta: 1.50
+    strength: 1.0
+    description: "v2.2.1 proven range for visible effects"
+    category: "v221_proven"
+    use_case: "visible transformations, good starting point"
+
+  v221_strong:
+    name: "v2.2.1: Strong"
+    lambda: 1.30
+    delta: 1.50
+    strength: 1.0
+    description: "v2.2.1 proven strong edits"
+    category: "v221_proven"
+    use_case: "dramatic transformations, clear changes"
+
+  v221_maximum:
+    name: "v2.2.1: Maximum"
+    lambda: 1.50
+    delta: 2.00
+    strength: 1.0
+    description: "v2.2.1 maximum tested range"
+    category: "v221_proven"
+    use_case: "extreme transformations, experimentation"
+
+  # Clean Room Workflow Presets
+  clean_room_gentle:
+    name: "Clean Room: Gentle"
+    lambda: 0.85
+    delta: 1.15
+    strength: 1.0
+    description: "Window preservation, gentle scaffolding removal"
+    category: "clean_room"
+    use_case: "architectural edits, preserve windows"
+
+  clean_room_balanced:
+    name: "Clean Room: Balanced"
+    lambda: 1.00
+    delta: 1.30
+    strength: 1.0
+    description: "Balanced scaffolding removal"
+    category: "clean_room"
+    use_case: "remove scaffolding, mostly preserve windows"
+
+  clean_room_strong:
+    name: "Clean Room: Strong"
+    lambda: 1.20
+    delta: 1.50
+    strength: 1.0
+    description: "Strong scaffolding removal, may affect windows"
+    category: "clean_room"
+    use_case: "complete scaffolding removal, accept window changes"

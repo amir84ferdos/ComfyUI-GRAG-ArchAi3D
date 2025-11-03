@@ -1,0 +1,349 @@
+# v2.2.1 Experimental Presets
+#
+# All 41 presets from v2.2.1 implementation
+# Range: 0.56-0.64 (conservative, structure-preserving)
+# Source: nodes/core/utils/archai3d_grag_modifier.py
+#
+# These presets were tested and proven to work in v2.2.1
+# Import them for backward compatibility
+
+presets:
+  custom:
+    name: "Custom"
+    lambda: 1.0
+    delta: 1.0
+    strength: 1.0
+    description: "Manual control - adjust all parameters yourself"
+    category: "manual"
+
+  # Presets 01-10 (0.56-0.57 range)
+  preset_01:
+    name: "Preset 01"
+    lambda: 0.56
+    delta: 0.64
+    strength: 0.56
+    description: "Low str, low λ, mid δ"
+    category: "v221_experimental"
+
+  preset_02:
+    name: "Preset 02"
+    lambda: 0.58
+    delta: 0.62
+    strength: 0.56
+    description: "Low str, low-mid λ, mid-low δ"
+    category: "v221_experimental"
+
+  preset_03:
+    name: "Preset 03"
+    lambda: 0.60
+    delta: 0.60
+    strength: 0.56
+    description: "Low str, mid λ, mid δ"
+    category: "v221_experimental"
+
+  preset_04:
+    name: "Preset 04"
+    lambda: 0.62
+    delta: 0.58
+    strength: 0.56
+    description: "Low str, mid-high λ, low-mid δ"
+    category: "v221_experimental"
+
+  preset_05:
+    name: "Preset 05"
+    lambda: 0.64
+    delta: 0.56
+    strength: 0.56
+    description: "Low str, high λ, low δ"
+    category: "v221_experimental"
+
+  preset_06:
+    name: "Preset 06"
+    lambda: 0.57
+    delta: 0.63
+    strength: 0.57
+    description: "Low+ str, low+ λ, mid+ δ"
+    category: "v221_experimental"
+
+  preset_07:
+    name: "Preset 07"
+    lambda: 0.59
+    delta: 0.61
+    strength: 0.57
+    description: "Low+ str, mid- λ, mid δ"
+    category: "v221_experimental"
+
+  preset_08:
+    name: "Preset 08"
+    lambda: 0.61
+    delta: 0.59
+    strength: 0.57
+    description: "Low+ str, mid+ λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_09:
+    name: "Preset 09"
+    lambda: 0.63
+    delta: 0.57
+    strength: 0.57
+    description: "Low+ str, mid++ λ, low+ δ"
+    category: "v221_experimental"
+
+  preset_10:
+    name: "Preset 10"
+    lambda: 0.56
+    delta: 0.64
+    strength: 0.57
+    description: "Low+ str, low λ, high δ"
+    category: "v221_experimental"
+
+  # Presets 11-20 (0.58-0.59 range)
+  preset_11:
+    name: "Preset 11"
+    lambda: 0.56
+    delta: 0.62
+    strength: 0.58
+    description: "Mid- str, low λ, mid-low δ"
+    category: "v221_experimental"
+
+  preset_12:
+    name: "Preset 12"
+    lambda: 0.58
+    delta: 0.60
+    strength: 0.58
+    description: "Mid- str, mid- λ, mid δ"
+    category: "v221_experimental"
+
+  preset_13:
+    name: "Preset 13"
+    lambda: 0.60
+    delta: 0.58
+    strength: 0.58
+    description: "Mid- str, mid λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_14:
+    name: "Preset 14"
+    lambda: 0.62
+    delta: 0.56
+    strength: 0.58
+    description: "Mid- str, mid-high λ, low δ"
+    category: "v221_experimental"
+
+  preset_15:
+    name: "Preset 15"
+    lambda: 0.64
+    delta: 0.64
+    strength: 0.58
+    description: "Mid- str, high λ, high δ"
+    category: "v221_experimental"
+
+  preset_16:
+    name: "Preset 16"
+    lambda: 0.57
+    delta: 0.61
+    strength: 0.59
+    description: "Mid str, low+ λ, mid δ"
+    category: "v221_experimental"
+
+  preset_17:
+    name: "Preset 17"
+    lambda: 0.59
+    delta: 0.59
+    strength: 0.59
+    description: "Mid str, mid- λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_18:
+    name: "Preset 18"
+    lambda: 0.61
+    delta: 0.57
+    strength: 0.59
+    description: "Mid str, mid+ λ, low+ δ"
+    category: "v221_experimental"
+
+  preset_19:
+    name: "Preset 19"
+    lambda: 0.63
+    delta: 0.63
+    strength: 0.59
+    description: "Mid str, mid++ λ, mid++ δ"
+    category: "v221_experimental"
+
+  preset_20:
+    name: "Preset 20"
+    lambda: 0.56
+    delta: 0.60
+    strength: 0.59
+    description: "Mid str, low λ, mid δ"
+    category: "v221_experimental"
+
+  # Presets 21-30 (0.60-0.61 range)
+  preset_21:
+    name: "Preset 21"
+    lambda: 0.56
+    delta: 0.58
+    strength: 0.60
+    description: "Mid str, low λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_22:
+    name: "Preset 22"
+    lambda: 0.58
+    delta: 0.56
+    strength: 0.60
+    description: "Mid str, mid- λ, low δ"
+    category: "v221_experimental"
+
+  preset_23:
+    name: "Preset 23"
+    lambda: 0.60
+    delta: 0.64
+    strength: 0.60
+    description: "Mid str, mid λ, high δ"
+    category: "v221_experimental"
+
+  preset_24:
+    name: "Preset 24"
+    lambda: 0.62
+    delta: 0.62
+    strength: 0.60
+    description: "Mid str, mid-high λ, mid-low δ"
+    category: "v221_experimental"
+
+  preset_25:
+    name: "Preset 25"
+    lambda: 0.64
+    delta: 0.60
+    strength: 0.60
+    description: "Mid str, high λ, mid δ"
+    category: "v221_experimental"
+
+  preset_26:
+    name: "Preset 26"
+    lambda: 0.57
+    delta: 0.59
+    strength: 0.61
+    description: "Mid+ str, low+ λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_27:
+    name: "Preset 27"
+    lambda: 0.59
+    delta: 0.57
+    strength: 0.61
+    description: "Mid+ str, mid- λ, low+ δ"
+    category: "v221_experimental"
+
+  preset_28:
+    name: "Preset 28"
+    lambda: 0.61
+    delta: 0.63
+    strength: 0.61
+    description: "Mid+ str, mid+ λ, mid++ δ"
+    category: "v221_experimental"
+
+  preset_29:
+    name: "Preset 29"
+    lambda: 0.63
+    delta: 0.61
+    strength: 0.61
+    description: "Mid+ str, mid++ λ, mid+ δ"
+    category: "v221_experimental"
+
+  preset_30:
+    name: "Preset 30"
+    lambda: 0.56
+    delta: 0.64
+    strength: 0.61
+    description: "Mid+ str, low λ, high δ"
+    category: "v221_experimental"
+
+  # Presets 31-41 (0.62-0.64 range)
+  preset_31:
+    name: "Preset 31"
+    lambda: 0.56
+    delta: 0.60
+    strength: 0.62
+    description: "Mid-high str, low λ, mid δ"
+    category: "v221_experimental"
+
+  preset_32:
+    name: "Preset 32"
+    lambda: 0.58
+    delta: 0.58
+    strength: 0.62
+    description: "Mid-high str, mid- λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_33:
+    name: "Preset 33"
+    lambda: 0.60
+    delta: 0.56
+    strength: 0.62
+    description: "Mid-high str, mid λ, low δ"
+    category: "v221_experimental"
+
+  preset_34:
+    name: "Preset 34"
+    lambda: 0.62
+    delta: 0.64
+    strength: 0.62
+    description: "Mid-high str, mid-high λ, high δ"
+    category: "v221_experimental"
+
+  preset_35:
+    name: "Preset 35"
+    lambda: 0.64
+    delta: 0.62
+    strength: 0.62
+    description: "Mid-high str, high λ, mid-low δ"
+    category: "v221_experimental"
+
+  preset_36:
+    name: "Preset 36"
+    lambda: 0.57
+    delta: 0.61
+    strength: 0.63
+    description: "High- str, low+ λ, mid δ"
+    category: "v221_experimental"
+
+  preset_37:
+    name: "Preset 37"
+    lambda: 0.59
+    delta: 0.63
+    strength: 0.63
+    description: "High- str, mid- λ, mid++ δ"
+    category: "v221_experimental"
+
+  preset_38:
+    name: "Preset 38"
+    lambda: 0.61
+    delta: 0.59
+    strength: 0.63
+    description: "High- str, mid+ λ, mid- δ"
+    category: "v221_experimental"
+
+  preset_39:
+    name: "Preset 39"
+    lambda: 0.63
+    delta: 0.57
+    strength: 0.63
+    description: "High- str, mid++ λ, low+ δ"
+    category: "v221_experimental"
+
+  preset_40:
+    name: "Preset 40"
+    lambda: 0.64
+    delta: 0.64
+    strength: 0.63
+    description: "High- str, high λ, high δ"
+    category: "v221_experimental"
+
+  preset_41:
+    name: "Preset 41"
+    lambda: 0.56
+    delta: 0.56
+    strength: 0.64
+    description: "High str, low λ, low δ"
+    category: "v221_experimental"

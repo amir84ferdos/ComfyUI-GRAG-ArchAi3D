@@ -1,0 +1,8 @@
+# GRAG v3.0 Requirements
+#
+# Optional dependency for full preset library (54 presets)
+# Without PyYAML, GRAG will use 5 hardcoded presets
+#
+# To install: pip install -r requirements.txt
+
+PyYAML>=6.0
