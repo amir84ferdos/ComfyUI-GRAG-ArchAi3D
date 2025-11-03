@@ -1,0 +1,23 @@
+name: Publish to Comfy Registry
+
+on:
+  push:
+    paths:
+      - 'pyproject.toml'
+    branches:
+      - main
+
+jobs:
+  publish-node:
+    name: Publish Custom Node to Registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Publish Custom Node
+        uses: Comfy-Org/publish-node-action@main
+        with:
+          # Personal access token for Comfy Registry
+          # This token should be stored in your repository secrets as REGISTRY_ACCESS_TOKEN
+          personal_access_token: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
