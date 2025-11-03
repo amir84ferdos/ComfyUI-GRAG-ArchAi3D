@@ -1,0 +1,47 @@
+[project]
+name = "comfyui-grag"
+version = "3.0.0"
+description = "Advanced GRAG implementation for ComfyUI with beginner-friendly and expert modes. Features Simple Controller (3 parameters), Unified Controller (25+ parameters), Advanced Sampler, and 54 curated presets."
+license = { text = "MIT" }
+requires-python = ">=3.8"
+authors = [
+    { name = "Amir Ferdos (ArchAi3d)", email = "Amir84ferdos@gmail.com" }
+]
+keywords = ["comfyui", "stable-diffusion", "grag", "attention-mechanism", "image-generation", "diffusion-models"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "PyYAML>=6.0"
+]
+
+[project.urls]
+Repository = "https://github.com/amir84ferdos/ComfyUI-GRAG"
+Documentation = "https://github.com/amir84ferdos/ComfyUI-GRAG#readme"
+Issues = "https://github.com/amir84ferdos/ComfyUI-GRAG/issues"
+Changelog = "https://github.com/amir84ferdos/ComfyUI-GRAG/blob/main/CHANGELOG.md"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.comfy]
+PublisherId = "amir84ferdos"
+DisplayName = "GRAG - Advanced Attention Control"
+Icon = "https://raw.githubusercontent.com/amir84ferdos/ComfyUI-GRAG/main/docs/icon.png"
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
