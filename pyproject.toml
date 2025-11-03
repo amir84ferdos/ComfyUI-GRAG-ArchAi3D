@@ -28,10 +28,10 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/amir84ferdos/ComfyUI-GRAG"
-Documentation = "https://github.com/amir84ferdos/ComfyUI-GRAG#readme"
-Issues = "https://github.com/amir84ferdos/ComfyUI-GRAG/issues"
-Changelog = "https://github.com/amir84ferdos/ComfyUI-GRAG/blob/main/CHANGELOG.md"
+Repository = "https://github.com/amir84ferdos/ComfyUI-GRAG-ArchAi3D"
+Documentation = "https://github.com/amir84ferdos/ComfyUI-GRAG-ArchAi3D#readme"
+Issues = "https://github.com/amir84ferdos/ComfyUI-GRAG-ArchAi3D/issues"
+Changelog = "https://github.com/amir84ferdos/ComfyUI-GRAG-ArchAi3D/blob/main/CHANGELOG.md"
 
 [project.readme]
 file = "README.md"
@@ -40,7 +40,7 @@ content-type = "text/markdown"
 [tool.comfy]
 PublisherId = "amir84ferdos"
 DisplayName = "GRAG - Advanced Attention Control"
-Icon = "https://raw.githubusercontent.com/amir84ferdos/ComfyUI-GRAG/main/docs/icon.png"
+Icon = "https://raw.githubusercontent.com/amir84ferdos/ComfyUI-GRAG-ArchAi3D/main/docs/icon.png"
 
 [build-system]
 requires = ["setuptools>=45", "wheel"]
