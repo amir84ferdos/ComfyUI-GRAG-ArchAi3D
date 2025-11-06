@@ -1,6 +1,6 @@
 [project]
 name = "comfyui-grag"
-version = "3.0.0"
+version = "3.0.1"
 description = "Advanced GRAG implementation for ComfyUI with beginner-friendly and expert modes. Features Simple Controller (3 parameters), Unified Controller (25+ parameters), Advanced Sampler, and 54 curated presets."
 license = { text = "MIT" }
 requires-python = ">=3.8"

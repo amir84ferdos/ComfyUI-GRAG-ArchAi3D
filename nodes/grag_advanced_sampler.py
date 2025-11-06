@@ -155,17 +155,19 @@ class GRAGAdvancedSampler:
                                    attention_mask=None, image_rotary_emb=None, transformer_options={}):
                         # Replicate attention forward pass with GRAG injection
 
+                        batch_size = hidden_states.shape[0]
+                        seq_img = hidden_states.shape[1]
                         seq_txt = encoder_hidden_states.shape[1]
 
-                        # Image stream QKV
-                        img_query = attn_module.to_q(hidden_states).unflatten(-1, (attn_module.heads, -1))
-                        img_key = attn_module.to_k(hidden_states).unflatten(-1, (attn_module.heads, -1))
-                        img_value = attn_module.to_v(hidden_states).unflatten(-1, (attn_module.heads, -1))
+                        # Image stream QKV - use BHND format (batch, heads, seq, dim) to match new Qwen implementation
+                        img_query = attn_module.to_q(hidden_states).view(batch_size, seq_img, attn_module.heads, -1).transpose(1, 2).contiguous()
+                        img_key = attn_module.to_k(hidden_states).view(batch_size, seq_img, attn_module.heads, -1).transpose(1, 2).contiguous()
+                        img_value = attn_module.to_v(hidden_states).view(batch_size, seq_img, attn_module.heads, -1).transpose(1, 2)
 
-                        # Text stream QKV
-                        txt_query = attn_module.add_q_proj(encoder_hidden_states).unflatten(-1, (attn_module.heads, -1))
-                        txt_key = attn_module.add_k_proj(encoder_hidden_states).unflatten(-1, (attn_module.heads, -1))
-                        txt_value = attn_module.add_v_proj(encoder_hidden_states).unflatten(-1, (attn_module.heads, -1))
+                        # Text stream QKV - use BHND format
+                        txt_query = attn_module.add_q_proj(encoder_hidden_states).view(batch_size, seq_txt, attn_module.heads, -1).transpose(1, 2).contiguous()
+                        txt_key = attn_module.add_k_proj(encoder_hidden_states).view(batch_size, seq_txt, attn_module.heads, -1).transpose(1, 2).contiguous()
+                        txt_value = attn_module.add_v_proj(encoder_hidden_states).view(batch_size, seq_txt, attn_module.heads, -1).transpose(1, 2)
 
                         # Normalization
                         img_query = attn_module.norm_q(img_query)
@@ -173,21 +175,23 @@ class GRAGAdvancedSampler:
                         txt_query = attn_module.norm_added_q(txt_query)
                         txt_key = attn_module.norm_added_k(txt_key)
 
-                        # Combine streams
-                        joint_query = torch.cat([txt_query, img_query], dim=1)
-                        joint_key = torch.cat([txt_key, img_key], dim=1)
-                        joint_value = torch.cat([txt_value, img_value], dim=1)
+                        # Combine streams along sequence dimension (dim=2 for BHND format)
+                        joint_query = torch.cat([txt_query, img_query], dim=2)
+                        joint_key = torch.cat([txt_key, img_key], dim=2)
+                        joint_value = torch.cat([txt_value, img_value], dim=2)
 
-                        # Apply RoPE
-                        from comfy.ldm.qwen_image.model import apply_rotary_emb
-                        joint_query = apply_rotary_emb(joint_query, image_rotary_emb)
-                        joint_key = apply_rotary_emb(joint_key, image_rotary_emb)
+                        # Apply RoPE using new apply_rope1 function
+                        from comfy.ldm.flux.math import apply_rope1
+                        joint_query = apply_rope1(joint_query, image_rotary_emb)
+                        joint_key = apply_rope1(joint_key, image_rotary_emb)
 
                         # ===== GRAG v3.0 INJECTION POINT =====
                         # Apply GRAG reweighting to keys BEFORE final flattening
                         try:
-                            # Flatten keys temporarily for GRAG
-                            joint_key_flat = joint_key.flatten(start_dim=2)  # [B, S, H*D]
+                            # Convert BHND to BSHD format for GRAG, then flatten
+                            # BHND: [B, H, S, D] -> BSHD: [B, S, H, D] -> [B, S, H*D]
+                            joint_key_for_grag = joint_key.transpose(1, 2).contiguous()  # BHND -> BSHD
+                            joint_key_flat = joint_key_for_grag.flatten(start_dim=2)  # [B, S, H*D]
 
                             # Update config with layer index for per-layer control
                             layer_config = GRAGConfig(
@@ -210,8 +214,9 @@ class GRAGAdvancedSampler:
                                 layer_config
                             )
 
-                            # Unflatten back to [B, S, H, D] for consistency
-                            joint_key = joint_key_flat.unflatten(-1, (attn_module.heads, -1))
+                            # Unflatten back to BSHD then transpose back to BHND
+                            joint_key_for_grag = joint_key_flat.unflatten(-1, (attn_module.heads, -1))  # [B, S, H, D]
+                            joint_key = joint_key_for_grag.transpose(1, 2).contiguous()  # BSHD -> BHND
 
                         except Exception as e:
                             print(f"[GRAG v3.0] Warning: Reweighting failed at layer {layer_id}: {e}")
@@ -220,19 +225,16 @@ class GRAGAdvancedSampler:
                             pass  # Continue with original keys if GRAG fails
                         # ===== END GRAG v3.0 =====
 
-                        # Flatten for attention
-                        joint_query = joint_query.flatten(start_dim=2)
-                        joint_key = joint_key.flatten(start_dim=2)
-                        joint_value = joint_value.flatten(start_dim=2)
-
-                        # Standard attention
+                        # Pass tensors in BHND format with skip_reshape=True (new Qwen format)
+                        # Output will be BSD format (batch, seq, heads*dim) due to default skip_output_reshape=False
                         from comfy.ldm.modules.attention import optimized_attention_masked
                         joint_hidden_states = optimized_attention_masked(
                             joint_query, joint_key, joint_value, attn_module.heads,
-                            attention_mask, transformer_options=transformer_options
+                            attention_mask, transformer_options=transformer_options,
+                            skip_reshape=True  # Input is BHND, output is BSD (due to default reshape)
                         )
 
-                        # Split streams
+                        # Split streams - output is already in BSD format, no transpose needed
                         txt_attn_output = joint_hidden_states[:, :seq_txt, :]
                         img_attn_output = joint_hidden_states[:, seq_txt:, :]
 

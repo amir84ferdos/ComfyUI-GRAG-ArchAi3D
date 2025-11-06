@@ -5,6 +5,23 @@ All notable changes to the GRAG v3.0 project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.1] - 2025-01-07
+
+### Fixed
+- **ComfyUI Compatibility** - Updated GRAG Advanced Sampler for latest ComfyUI changes
+  - Changed tensor format from BSHD to BHND (Batch, Heads, Sequence, Dim) to match Qwen implementation
+  - Updated RoPE function from `apply_rotary_emb` to `apply_rope1`
+  - Updated import path from `comfy.ldm.qwen_image.model` to `comfy.ldm.flux.math`
+  - Added `skip_reshape=True` parameter to `optimized_attention_masked` call
+  - Fixed GRAG format conversion: BHND → BSHD → Process → BHND
+  - Fixed attention output handling (output is BSD format, not BHND)
+
+### Technical Details
+- Resolves tensor dimension mismatch errors caused by ComfyUI commit 4cd881866bad0cde70273cc123d725693c1f2759
+- QKV projections now use `.view().transpose()` instead of `.unflatten()` for BHND format
+- Concatenation dimension changed from `dim=1` to `dim=2` for BHND format
+- Proper format conversions for GRAG processing maintain compatibility with key reweighting algorithm
+
 ## [3.0.0] - 2025-11-03
 
 ### Added
